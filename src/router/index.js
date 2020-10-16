@@ -22,6 +22,20 @@ const routes = [
       return import(/* webpackChunkName: "exercise1/answer" */ '../views/Exercise1Answer/index.vue')
     }
   },
+  {
+    path: '/exercise2',
+    name: 'Exercise2',
+    component: function () {
+      return import(/* webpackChunkName: "exercise2" */ '../views/Exercise2/index.vue')
+    }
+  },
+  {
+    path: '/exercise2-answer',
+    name: 'Exercise2Answer',
+    component: function () {
+      return import(/* webpackChunkName: "exercise2/answer" */ '../views/Exercise2Answer/index.vue')
+    }
+  },
 ]
 
 const router = createRouter({
