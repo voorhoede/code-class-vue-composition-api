@@ -2,7 +2,8 @@
   <div id="nav">
     <router-link to="exercise1">Exercise 1</router-link> |
     <router-link to="exercise2">Exercise 2</router-link> |
-    <router-link to="exercise3">Exercise 3</router-link>
+    <router-link to="exercise3">Exercise 3</router-link> |
+    <router-link to="exercise4">Exercise 4</router-link>
   </div>
   <router-view/>
 </template>
