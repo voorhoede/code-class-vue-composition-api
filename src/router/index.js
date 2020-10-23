@@ -36,6 +36,20 @@ const routes = [
       return import(/* webpackChunkName: "exercise2/answer" */ '../views/Exercise2Answer/index.vue')
     }
   },
+  {
+    path: '/exercise3',
+    name: 'Exercise3',
+    component: function () {
+      return import(/* webpackChunkName: "exercise3" */ '../views/Exercise3/index.vue')
+    }
+  },
+  {
+    path: '/exercise3-answer',
+    name: 'Exercise3Answer',
+    component: function () {
+      return import(/* webpackChunkName: "exercise3/answer" */ '../views/Exercise3Answer/index.vue')
+    }
+  },
 ]
 
 const router = createRouter({
