@@ -92,6 +92,7 @@
        * @TODO:
        * 1. Modify `useSearch` to make `filteredBrands` a computed property,
        *    returning only the brands matching the searchQuery.
+       *    Be aware that the returned `filteredBrands` isn't used initially ;)
        * 2. Modify `useSearch` to make `sortedBrands` a computed property,
        *    returning the brands sorted by the `activeSortingOption`
        * 3. Make the two composition functions work together:
@@ -116,6 +117,8 @@
 
   function useSearch(brands) {
     const searchQuery = ref('')
+    // Be aware of the fact `searchRegex` isn't reactive outside of the `computed` callback.
+    const searchRegex = new RegExp(searchQuery.value, 'gi');
     const filteredBrands = brands;
 
     return { searchQuery, filteredBrands }
@@ -129,12 +132,33 @@
       'Alphabetical descending'
     ]
     const activeSortingOption = ref(availableSortingOptions[0])
+    // make use of the sortBrands function
     const sortedBrands = brands
 
     return {
       availableSortingOptions,
       activeSortingOption,
       sortedBrands,
+    }
+  }
+
+  function sortBrands(brands, sortingOption) {
+    switch (sortingOption) {
+      case ('Length ascending'): {
+        return brands.sort((a, b) => a.length - b.length)
+      }
+      case ('Length descending'): {
+        return brands.sort((a, b) => b.length - a.length)
+      }
+      case ('Alphabetical ascending'): {
+        return brands.sort((a, b) => a.localeCompare(b))
+      }
+      case ('Alphabetical descending'): {
+        return brands.sort((a, b) => b.localeCompare(a))
+      }
+      default: {
+        return brands
+      }
     }
   }
 </script>

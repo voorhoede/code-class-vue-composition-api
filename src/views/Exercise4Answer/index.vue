@@ -114,7 +114,7 @@
     return { searchQuery, filteredBrands }
   }
 
-  function useSorting(brandsRef) {
+  function useSorting(brands) {
     const availableSortingOptions = [
       'Length ascending',
       'Length descending',
@@ -123,26 +123,33 @@
     ]
     const activeSortingOption = ref(availableSortingOptions[0])
     const sortedBrands = computed(() => {
-      switch (activeSortingOption.value) {
-        case ('Length ascending'): {
-          return brandsRef.value.sort((a, b) => a.length - b.length)
-        }
-        case ('Length descending'): {
-          return brandsRef.value.sort((a, b) => b.length - a.length)
-        }
-        case ('Alphabetical ascending'): {
-          return brandsRef.value.sort((a, b) => a.localeCompare(b))
-        }
-        case ('Alphabetical descending'): {
-          return brandsRef.value.sort((a, b) => b.localeCompare(a))
-        }
-      }
+      return sortBrands(brands.value, activeSortingOption.value)
     })
 
     return {
       availableSortingOptions,
       activeSortingOption,
       sortedBrands,
+    }
+  }
+
+  function sortBrands(brands, sortingOption) {
+    switch (sortingOption) {
+      case ('Length ascending'): {
+        return brands.sort((a, b) => a.length - b.length)
+      }
+      case ('Length descending'): {
+        return brands.sort((a, b) => b.length - a.length)
+      }
+      case ('Alphabetical ascending'): {
+        return brands.sort((a, b) => a.localeCompare(b))
+      }
+      case ('Alphabetical descending'): {
+        return brands.sort((a, b) => b.localeCompare(a))
+      }
+      default: {
+        return brands
+      }
     }
   }
 </script>
